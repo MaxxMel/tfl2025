@@ -83,7 +83,19 @@ FuzzResult fuzzTest(const RuleSystem& systemT, const RuleSystem& systemT2) {
     bool ok = !normalized.empty();
     return {ok, s, path};
 }
-
+/*
+rules = {
+            {"aa", "bb"},
+            {"ccb", "dca"},
+            {"a", "dcc"},
+            {"cd", "cb"},
+            {"aabcd", "bbbbc"},
+            {"aaaa", "bbbb"},
+            {"abcbdb", "ddbcbcbc"},
+            {"cccd", "dbcccc"},
+            {"cbdcbcadcbd", "cbdcbcdccdbcd"},
+            {"bcdacbdacd", "bcbdddcccbddcbccd"}
+        };*/
 int main() {
     RuleSystem T({
         {"aa", "bb"},
@@ -99,9 +111,10 @@ int main() {
         {"cd", "bc"},
         {"aabcd", "bbbbc"},
         {"aaaa", "bbbb"},
-        {"abcbdb", "ddbcbcbcccdb"},
+        {"abcbdb", "ddbcbcbc"},
         {"cccd", "dbcccc"},
-        {"ccaad", "dbbcbdbcccc"}
+        {"cbdcbcadcbd", "cbdcbcdccdbcd"},
+        {"bcdacbdacd", "bcbdddcccbddcbccd"}
     });
 
     auto result = fuzzTest(T, T2);
