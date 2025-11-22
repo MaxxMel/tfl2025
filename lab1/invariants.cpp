@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -6,9 +5,12 @@
 #include <utility>
 
 using namespace std;
+
 struct Rule {
     string l, r;
-    Rule(string left, string right) : l(move(left)), r(move(right)) {}
+
+    Rule(const string& left, const string& right)
+        : l(left), r(right) {}
 };
 
 struct InvariantCheckResult {
@@ -50,8 +52,6 @@ namespace invariants {
     }
 
 }
-
-//класс переписывания
 
 class RewritingSystem {
     mt19937 gen{ random_device{}() };
@@ -98,7 +98,7 @@ public:
     }
 };
 
-// проверка инвариантов
+
 
 InvariantCheckResult checkString(
     RewritingSystem& rs,
@@ -113,12 +113,14 @@ InvariantCheckResult checkString(
     for (int i = 0; i < maxAttempts; ++i) {
         int ruleNum = rs.randomRuleIndex();
         const Rule& rule = rs.rules[ruleNum];
-        auto [canApply, pos] = rs.findRule(rule, s);
+        auto r = rs.findRule(rule, s); 
+        bool canApply = r.first;
+        int pos = r.second;
 
         if (!canApply)
             continue;
 
-        string prev = s;
+        string prev = s; 
         rs.applyRule(s, rule, pos);
 
         if (!invariant(prev, s)) {
@@ -129,7 +131,7 @@ InvariantCheckResult checkString(
             return result;
         }
     }
-    return result;
+    return result; 
 }
 
 InvariantCheckResult runInvariantTests(
@@ -146,7 +148,6 @@ InvariantCheckResult runInvariantTests(
     }
     return {};
 }
-
 
 int main() {
     ios::sync_with_stdio(false);
@@ -171,8 +172,8 @@ int main() {
             cout << "   Нарушение найдено!\n";
             cout << "  Строка: " << result.failedString << "\n";
             cout << "  Применено правило: "
-                 << rs.rules[result.ruleIndex].l << " -> "
-                 << rs.rules[result.ruleIndex].r << "\n";
+                << rs.rules[result.ruleIndex].l << " -> "
+                << rs.rules[result.ruleIndex].r << "\n";
         }
         cout << '\n';
         ++num;
