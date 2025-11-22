@@ -11,18 +11,18 @@ struct Rule {
     string left;
     string right;
 
-    Rule(string l, string r) : left(std::move(l)), right(std::move(r)) {}
+    Rule(const string& l, const string& r) : left(l), right(r) {}
 };
 
 class RuleSystem {
 public:
-    explicit RuleSystem(vector<Rule> rules) : rules_(std::move(rules)) {}
+    explicit RuleSystem(const vector<Rule>& rules) : rules_(rules) {}
 
     bool applyOnce(string& text) const {
         for (const auto& rule : rules_) {
             size_t pos = text.find(rule.left);
             if (pos != string::npos) {
-                text.replace(pos, rule.left.size(), rule.right);
+                text.replace(pos, rule.left.size(), rule.right); 
                 return true;
             }
         }
@@ -43,17 +43,17 @@ public:
             int idx = dist(gen);
             path.push_back(idx);
 
-            const auto& rule = rules_[idx];
+            const Rule& rule = rules_[idx];
             size_t pos = text.find(rule.left);
             if (pos != string::npos) {
-                text.replace(pos, rule.left.size(), rule.right);
+                text.replace(pos, rule.left.size(), rule.right); 
             }
         }
-        return path;
+        return path; 
     }
 
 private:
-    vector<Rule> rules_;
+    vector<Rule> rules_; 
 };
 
 string getRandomString(int length, const string& alphabet = "abcd") {
@@ -63,8 +63,10 @@ string getRandomString(int length, const string& alphabet = "abcd") {
 
     string s;
     s.reserve(length);
-    for (int i = 0; i < length; ++i) s += alphabet[dist(gen)];
-    return s;
+    for (int i = 0; i < length; ++i)
+        s += alphabet[dist(gen)]; 
+
+    return s; 
 }
 
 struct FuzzResult {
@@ -76,48 +78,44 @@ struct FuzzResult {
 FuzzResult fuzzTest(const RuleSystem& systemT, const RuleSystem& systemT2) {
     string s = getRandomString(6);
     string original = s;
-    auto path = systemT.randomTransform(s, 7);
+
+    vector<int> path = systemT.randomTransform(s, 7);
+
     string normalized = s;
     systemT2.normalize(normalized);
 
     bool ok = !normalized.empty();
-    return {ok, s, path};
+
+    FuzzResult res;
+    res.success = ok;
+    res.finalString = s;  
+    res.path = path;      
+    return res;          
 }
-/*
-rules = {
-            {"aa", "bb"},
-            {"ccb", "dca"},
-            {"a", "dcc"},
-            {"cd", "cb"},
-            {"aabcd", "bbbbc"},
-            {"aaaa", "bbbb"},
-            {"abcbdb", "ddbcbcbc"},
-            {"cccd", "dbcccc"},
-            {"cbdcbcadcbd", "cbdcbcdccdbcd"},
-            {"bcdacbdacd", "bcbdddcccbddcbccd"}
-        };*/
+
 int main() {
     RuleSystem T({
-        {"aa", "bb"},
-        {"ccb", "dca"},
-        {"a", "dcc"},
-        {"cd", "bc"}
+        Rule("aa", "bb"),
+        Rule("ccb", "dca"),
+        Rule("a", "dcc"),
+        Rule("cd", "bc")
     });
 
     RuleSystem T2({
-        {"aa", "bb"},
-        {"ccb", "dca"},
-        {"a", "dcc"},
-        {"cd", "bc"},
-        {"aabcd", "bbbbc"},
-        {"aaaa", "bbbb"},
-        {"abcbdb", "ddbcbcbc"},
-        {"cccd", "dbcccc"},
-        {"cbdcbcadcbd", "cbdcbcdccdbcd"},
-        {"bcdacbdacd", "bcbdddcccbddcbccd"}
+        Rule("aa", "bb"),
+        Rule("ccb", "dca"),
+        Rule("a", "dcc"),
+        Rule("cd", "bc"),
+        Rule("aabcd", "bbbbc"),
+        Rule("aaaa", "bbbb"),
+        Rule("abcbdb", "ddbcbcbc"),
+        Rule("cccd", "dbcccc"),
+        Rule("cbdcbcadcbd", "cbdcbcdccdbcd"),
+        Rule("bcdacbdacd", "bcbdddcccbddcbccd")
     });
 
-    auto result = fuzzTest(T, T2);
+    FuzzResult result = fuzzTest(T, T2);
+
     if (result.success) {
         cout << "Все тесты успешны\n";
     } else {
