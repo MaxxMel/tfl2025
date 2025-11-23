@@ -18,7 +18,7 @@ $R_2 = bb^*a(a|b)^*$  - справка для построения - НКА.
 
 
 ### Построение обычного НКА
-По инструкции из [ ссылки](https://neerc.ifmo.ru/wiki/index.php?title=Автоматы_с_eps-переходами._Eps-замыкание)был построен обычный НКА: результат ниже в виде таблицы: 
+По инструкции из [ссылки](https://neerc.ifmo.ru/wiki/index.php?title=Автоматы_с_eps-переходами._Eps-замыкание)был построен обычный НКА: результат ниже в виде таблицы: 
 ```
 state,delta_a,delta_b,accepting
 1,6;9;4;5;7;16;17;18;20,10;11;13,false
@@ -80,7 +80,7 @@ state,delta_a,delta_b,accepting
 # 2) Построение возможно малого НКА, распознающего данное регулярное выражение. Возможно ПКА, распознающего регулярное выражение. Частично обосновать таблицей классов эквивалентности.
 
 ## Построение ПКА 
-Попытки строить ПКА на основе [файла](https://swt.informatik.uni-freiburg.de/teaching/SS2013/AutomataTheory/Resources/Slides/alternatingfiniteautomata-seminarslides-matthiashengel.pdf)
+Попытки строить ПКА на основе [ файла](https://swt.informatik.uni-freiburg.de/teaching/SS2013/AutomataTheory/Resources/Slides/alternatingfiniteautomata-seminarslides-matthiashengel.pdf)
 Самый простой способ построить ПКА - вложить DFA в AFA как частный случай и пометить все состояния как $\exists$ - состояния. Получится эквивалентный нашему ДКА ПКА. $=>$ Множество $Q_\exists$ состояний: {1, 2, .., 13} - все состояния исходного ДКА. Множество $Q_\forall = \emptyset$. Начальное состояние - 1. 
 
 ## Построение Малого НКА 
