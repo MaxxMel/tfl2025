@@ -8,6 +8,10 @@
 # задача 2 
 <img width="538" height="759" alt="image" src="https://github.com/user-attachments/assets/07229044-2327-488e-b752-45e69c020dee" />
 
+# задача 1
+<img width="665" height="860" alt="image" src="https://github.com/user-attachments/assets/9e730480-4557-41ea-a9ca-c8e1add03f24" />
+<img width="673" height="307" alt="image" src="https://github.com/user-attachments/assets/fdfd1d73-a392-4318-a8fc-cd056e0bf6c4" />
 
 
 
+commit for new branch
