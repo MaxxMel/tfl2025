@@ -8,6 +8,9 @@
 # задача 2 
 <img width="538" height="759" alt="image" src="https://github.com/user-attachments/assets/07229044-2327-488e-b752-45e69c020dee" />
 
+# задача 1
+<img width="729" height="1004" alt="image" src="https://github.com/user-attachments/assets/b437a3f5-633a-46b3-aaaf-be023a9cc9b2" />
+
 
 
 
