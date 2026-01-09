@@ -6,3 +6,5 @@
 
 # задача 1 
 <img width="601" height="843" alt="image" src="https://github.com/user-attachments/assets/278c0fe3-e448-4f2f-9841-4625940f84f5" />
+
+commit for branch
