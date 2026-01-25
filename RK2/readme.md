@@ -1,6 +1,5 @@
 # задача 2
-<img width="598" height="874" alt="image" src="https://github.com/user-attachments/assets/2393b2d9-7fe2-4583-b5a5-eb055e14d48b" />
-
+<img width="687" height="538" alt="image" src="https://github.com/user-attachments/assets/ecf9cb22-bed3-4d7d-b652-3055bb2d70e9" />
 
 # задача 3 
 <img width="587" height="808" alt="image" src="https://github.com/user-attachments/assets/bd5668dd-1760-45d8-aeb3-967d1ed0e850" />
