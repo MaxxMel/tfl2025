@@ -2,7 +2,7 @@ import time
 import random
 import matplotlib.pyplot as plt
 
-def benchmark_simple(min_len=13, max_len=30, samples=300):
+def benchmark(min_len=13, max_len=30, samples=300):
     lens = []
     slow_times = []
     fast_times = []
@@ -31,7 +31,7 @@ def benchmark_simple(min_len=13, max_len=30, samples=300):
 
     return lens, slow_times, fast_times
 
-def plot_simple(lens, slow, fast):
+def plot(lens, slow, fast):
     plt.figure()
 
     plt.plot(lens, slow, label="slow parser")
